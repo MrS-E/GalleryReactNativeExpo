@@ -4,14 +4,13 @@ import {View, Image, ImageBackground, Animated, Dimensions} from 'react-native';
 import GestureRecognizer from "react-native-swipe-gestures";
 
 
-function Details({id, setShowDetails, showDetails}) {
+export default function ({post, setShowDetails, showDetails}) {
     const [show, setShow] = useState()
     const swipeRight = () =>{
         setShowDetails(false)
     }
 
     useEffect(() => {
-        console.log(showDetails)
         if(showDetails) {
             setShow(true)
             runAnimationIn()
@@ -19,7 +18,6 @@ function Details({id, setShowDetails, showDetails}) {
         else{
             runAnimationOut()
         }
-        console.log(show)
     }, [showDetails]);
 
     const animationValue = useRef(new Animated.Value(0)).current
@@ -58,5 +56,3 @@ function Details({id, setShowDetails, showDetails}) {
         </GestureRecognizer>
     ):null;
 }
-
-export default Details;

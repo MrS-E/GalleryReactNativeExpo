@@ -14,7 +14,17 @@ export default StyleSheet.create({
         right: '-75%'
     },
     controlles:{
-        position: "absolute"
+        position: "absolute",
+        width: 40,
+        top: "25%",
+        height:"50%",
+        right:"3%",
+        display: "flex",
+        justifyContent:"center",
+        flexDirection: "column"
+    },
+    control_btn:{
+        backgroundColor: "#fff"
     },
     image_container:{
         display: "flex",
