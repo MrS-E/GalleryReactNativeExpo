@@ -6,6 +6,7 @@ import Settings from "./components/SettingsMain";
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import {useEffect, useState} from "react";
 import Sqlite from "./classes/sqlite";
+import * as FileSystem from "expo-file-system";
 
 export default function App() {
     const Tab = createBottomTabNavigator();
@@ -33,7 +34,9 @@ export default function App() {
                         />
                     );
                 },
-                headerShown: false
+                headerShown: false,
+                tabBarActiveTintColor: 'tomato',
+                tabBarInactiveTintColor: 'gray',
             })}>
                 <Tab.Screen name="Home" options={{title: ""}} component={Home} initialParams={{db: DB}}/>
                 <Tab.Screen name="Search" options={{title: ""}} component={Search}/>
