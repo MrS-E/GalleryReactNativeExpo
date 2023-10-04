@@ -5,12 +5,12 @@ import Settings from "./Settings";
 import Favorites from "./Favorites";
 import Upload from "./Upload";
 
-export default function (props) {
+export default function ({db, setDb}) {
     const Setting = createNativeStackNavigator();
     return (
         <Setting.Navigator>
-            <Setting.Screen name="Settings" component={Settings} />
-            <Setting.Screen name="Favorites" component={Favorites} />
+            <Setting.Screen name="Settings" component={Settings} initialParams={{sqlite:db, setDb:setDb}}/>
+            <Setting.Screen name="Favorites" component={Favorites}/>
             <Setting.Screen name="Uploads" component={Upload} />
         </Setting.Navigator>
     );

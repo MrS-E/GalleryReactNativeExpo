@@ -49,8 +49,6 @@ export default function ({post, setShowDetails, showDetails}) {
         ]
     }
 
-    console.log(post)
-
     return show?(
         <GestureRecognizer onSwipeRight={swipeRight} style={{width:'100%',height:'100%',position:"absolute"}}>
             <Animated.View style={[styles.info_box,style]}>
