@@ -7,6 +7,7 @@ import {
     Dimensions,
     TouchableOpacity,
     Text,
+    Alert,
     ImageBackground, SafeAreaView, Pressable
 } from "react-native";
 import {useState} from "react";

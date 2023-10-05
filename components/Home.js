@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useAssets} from "expo-asset";
-import {Image, ImageBackground, StyleSheet, View, Text} from "react-native";
+import {Image, ImageBackground, StyleSheet, View, Text, Alert} from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 import {IconButton} from "react-native-paper";
 import Details from "./HomeDetails";
@@ -13,13 +13,9 @@ export default function ({navigation, route}) {
     const {sqlite} = route.params
 
     useEffect(() => {
-        console.log(sqlite)
+        //console.log(sqlite)
         sqlite.get_all('images').then(res => setImages(res.rows._array))
     });
-
-    useEffect(() => {
-        console.log(images)
-    }, [images])
 
     //swipe handler
     const swipeUp = () => {
@@ -39,6 +35,10 @@ export default function ({navigation, route}) {
         }
     }
     //button handler
+    const like = () => {
+        Alert.alert("Like", "Thx for the like.", [{text: 'OK', onPress: () => console.log('OK')},])
+    }
+
     if (images && images.length > 0) {
         return (
             <View style={styles.container}>
@@ -50,7 +50,7 @@ export default function ({navigation, route}) {
                 </GestureRecognizer>
 
                 <View style={styles.controlles}>
-                    <IconButton style={styles.control_btn} icon={assets ? assets[0] : "thumb-up"}/>
+                    <IconButton style={styles.control_btn} icon={assets ? assets[0] : "thumb-up"} onPress={like}/>
                     {/*<IconButton style={styles.control_btn} icon={assets ? assets[1] : "share"} />
                 <IconButton style={styles.control_btn} icon={assets ? assets[2] : "comment"} /> TODO add*/}
                     <IconButton style={styles.control_btn} icon={assets ? assets[3] : "plus"}
