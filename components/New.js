@@ -14,11 +14,11 @@ import {DatePickerInput} from 'react-native-paper-dates';
 import * as FileSystem from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 
-export default function ({route}) {
+export default function ({navigation, route}) {
     const [image, setImage] = useState(null)
-    const [name, setName] = useState()
-    const [tags, setTags] = useState()
-    const [desc, setDesc] = useState()
+    const [name, setName] = useState("")
+    const [tags, setTags] = useState("")
+    const [desc, setDesc] = useState("")
     const [date, setDate] = useState(new Date())
 
     const {sqlite} = route.params
@@ -37,8 +37,9 @@ export default function ({route}) {
         }
     }
     const save = () => {
-console.log(name, tags, desc, date.toLocaleDateString().replace('/', '.').replace('/', '.')) //ohne zweites replace 04.10/2023
-    sqlite.exec()
+        console.log(name, tags, desc, date.toLocaleDateString().replace('/', '.').replace('/', '.')) //ohne zweites replace 04.10/2023
+        sqlite.exec(`insert into images (name, date, desc, tags, uri) values ('${name}', '${date.toLocaleDateString('de')}', '${desc}','${tags.replace(' ', '').split("#").join(';')}' , '${image}');`)
+        navigation.navigate('Main')
     }
 
     return (

@@ -15,7 +15,7 @@ export default function ({navigation, route}) {
     useEffect(() => {
         console.log(sqlite)
         sqlite.get_all('images').then(res => setImages(res.rows._array))
-    }, [sqlite]);
+    });
 
     useEffect(() => {
         console.log(images)
