@@ -31,6 +31,7 @@ export default function ({navigation, route}) {
 
             if (totalAcceleration > shakeThreshold) {
                 console.log("shaking")
+                swipeUp()
             } else {
 
             }
