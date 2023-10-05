@@ -18,25 +18,19 @@ export default function ({navigation, route}) {
         sqlite.get_all('images').then(res => setImages(res.rows._array))
     });
 
-    useEffect(() => {
-        Accelerometer.addListener((accelerometerData) => {
-            const totalAcceleration =
-                Math.sqrt(
-                    accelerometerData.x * accelerometerData.x +
-                    accelerometerData.y * accelerometerData.y +
-                    accelerometerData.z * accelerometerData.z
-                );
-
-            const shakeThreshold = 2.5;
-
-            if (totalAcceleration > shakeThreshold) {
+    useEffect(()=> {
+        const a =Accelerometer.addListener((accelerometerData) => {
+            if (Math.sqrt(
+                accelerometerData.x * accelerometerData.x +
+                accelerometerData.y * accelerometerData.y +
+                accelerometerData.z * accelerometerData.z
+            ) > 2.5) {
                 console.log("shaking")
-                swipeUp()
-            } else {
-
+                swipeDown()
             }
         });
-    }, []);
+        return a.remove(); //without removal and new generation of handler, handler uses value of images like it was at his initialization
+    },[images])
 
     //swipe handler
     const swipeUp = () => {
