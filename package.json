@@ -19,6 +19,8 @@
     "expo-asset": "~8.10.1",
     "expo-document-picker": "~11.5.4",
     "expo-file-system": "~15.4.4",
+    "expo-image-picker": "~14.3.2",
+    "expo-sensors": "~12.3.0",
     "expo-sharing": "~11.5.0",
     "expo-splash-screen": "~0.20.5",
     "expo-sqlite": "~11.3.3",
@@ -29,8 +31,7 @@
     "react-native-paper": "^5.10.6",
     "react-native-paper-dates": "^0.19.7",
     "react-native-swipe-gestures": "^1.0.5",
-    "react-native-web": "~0.19.6",
-    "expo-image-picker": "~14.3.2"
+    "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

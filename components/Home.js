@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useAssets} from "expo-asset";
-import {Image, ImageBackground, StyleSheet, View, Text, Alert} from "react-native";
+import {Image, ImageBackground, StyleSheet, View, Text, Alert, Platform, BackHandler} from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 import {IconButton} from "react-native-paper";
 import Details from "./HomeDetails";
+import {Accelerometer, DeviceMotion} from 'expo-sensors';
 
 export default function ({navigation, route}) {
     const [images, setImages] = useState(null)
@@ -16,6 +17,25 @@ export default function ({navigation, route}) {
         //console.log(sqlite)
         sqlite.get_all('images').then(res => setImages(res.rows._array))
     });
+
+    useEffect(() => {
+        Accelerometer.addListener((accelerometerData) => {
+            const totalAcceleration =
+                Math.sqrt(
+                    accelerometerData.x * accelerometerData.x +
+                    accelerometerData.y * accelerometerData.y +
+                    accelerometerData.z * accelerometerData.z
+                );
+
+            const shakeThreshold = 2.5;
+
+            if (totalAcceleration > shakeThreshold) {
+                console.log("shaking")
+            } else {
+
+            }
+        });
+    }, []);
 
     //swipe handler
     const swipeUp = () => {
@@ -71,7 +91,7 @@ export default function ({navigation, route}) {
         )
     } else {
         return (
-            <View style={[styles.container, {justifyContent: "center", alignItems: "center"}]}>
+            <View style={[styles.container, {justifyContent: "center", alignItems: "center"}]} onPress={()=>Alert.alert("Error", "There was an Error, please restart the App. If that din't resolve the error please uninstall and reinstall the app", [{text: 'OK', onPress: () => Platform.OS === 'ios'?"":BackHandler.exitApp()}])}>
                 <Text style={{fontSize: 48, fontWeight: "bold", color: "#fff"}}>Loading</Text>
             </View>
         )
